@@ -18,7 +18,7 @@ if (config.auth.apiKey) {
   headers["cookie"] = `Bearer ${config.auth.cookie}`;
 }
 
-async function adminRequest({
+async function sendRequest({
   method,
   endpoint,
   data,
@@ -26,8 +26,17 @@ async function adminRequest({
   method?: string;
   endpoint: string;
   data?: any;
-}) {}
+}) {
+  if (!headers.cookie && !headers.Authorization)
+    throw new Error("No authentication method provided in config.json");
 
-async function userRequest() {}
+  const res = await fetch(`${panelURL}${endpoint}`, {
+    headers: headers,
+    body: data,
+  });
+  return await res.json().catch((err) => {
+    console.log(err.message);
+  });
+}
 
-export { adminRequest, userRequest };
+export default sendRequest;
