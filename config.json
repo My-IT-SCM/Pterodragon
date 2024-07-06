@@ -1,9 +1,14 @@
 {
   "discord-token": "",
   "panel-token": "",
+  "auth": {
+    "apiKey": "",
+    "cookie": ""
+  },
+  "panel-URL": "",
   "botActivity": {
-    "type": "WATCHING",
-    "activity": "Pterodragon",
+    "afk": false,
+    "name": "Hello Pterodragon",
     "status": "idle"
   },
   "debug": false
