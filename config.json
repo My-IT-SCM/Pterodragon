@@ -1,0 +1,10 @@
+{
+  "discord-token": "",
+  "panel-token": "",
+  "botActivity": {
+    "type": "WATCHING",
+    "activity": "Pterodragon",
+    "status": "idle"
+  },
+  "debug": false
+}
