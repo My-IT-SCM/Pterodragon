@@ -5,7 +5,7 @@ export default async function onInteractionCreate(interaction: Interaction, clie
     if(interaction.isCommand()){
         const commandName = interaction.commandName;
         const command = client.commandHandler.get(commandName);
-        if(!command) return;
+        if(!command) return interaction.reply("Command not found");
         await command.run(interaction, client);
     }
 }
