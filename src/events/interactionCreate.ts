@@ -6,6 +6,6 @@ export default async function onInteractionCreate(interaction: Interaction, clie
         const commandName = interaction.commandName;
         const command = client.commandHandler.get(commandName);
         if(!command) return;
-        await command.run(interaction);
+        await command.run(interaction, client);
     }
 }

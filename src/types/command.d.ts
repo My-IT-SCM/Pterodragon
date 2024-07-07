@@ -2,6 +2,7 @@ import type {
   CommandInteraction,
   ApplicationCommandData
 } from "discord.js";
+import Pterodragon from "../Pterodragon";
 
 interface BaseCommand {
   name: string;
@@ -12,6 +13,7 @@ interface BaseCommand {
   usage?: string;
   run(
     interaction: CommandInteraction,
+    client: Pterodragon
   ): Promise<void>;
 };
 

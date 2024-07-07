@@ -33,6 +33,10 @@ class CommandHandler {
   get(commandName: string): BaseCommand | undefined {
     return this.commands.get(commandName);
   }
+
+  async getAll() {
+    return this.commands.map((cmd) => cmd);
+  }
 }
 
 export default CommandHandler;
