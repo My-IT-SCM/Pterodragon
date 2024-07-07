@@ -20,6 +20,7 @@ class CommandHandler {
       if (!files || files.length === 0) continue;
       for (const file of files) {
         const cmd = (await import(`@commands/${category}/${file}`)).default;
+        if(!cmd.enabled) continue;
 
         this.commands.set(cmd.name, {
           ...cmd,
