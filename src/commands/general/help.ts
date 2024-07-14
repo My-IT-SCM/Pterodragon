@@ -1,10 +1,12 @@
 import { BaseCommand } from "@/types/command";
-import { EmbedBuilder } from "discord.js";
+import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import InteractionButtonPages from "@utils/InteractionButtonPage";
+const command = new SlashCommandBuilder()
+.setName("help")
+.setDescription("Shows all the commands")
 
 const ping: BaseCommand = {
-  name: "help",
-  description: "See available commands",
+  command: command,
   enabled: true,
   async run(interaction, client) {
     const commands = await client.commandHandler.getAll();
@@ -16,17 +18,22 @@ const ping: BaseCommand = {
       const current = commands.slice(start, start + pageLength);
 
       return new EmbedBuilder()
-        .setTitle("Pterodragon Commands")
-        .setDescription(current.map((cmd) => `**${cmd.name}** - ${cmd.description}`).join("\n"));
+        .setTitle(`Pterodragon Commands`)
+        .setDescription(
+          current
+            .map((cmd) => `**${cmd.name}** - ${cmd.description}`)
+            .join("\n")
+        )
+        .setTimestamp();
     });
 
     await InteractionButtonPages({
-        embeds: embeds,
-        interaction: interaction,
-        time: 60000,
-        end: false,
-        fastSkip: false
-    })
+      embeds: embeds,
+      interaction: interaction,
+      time: 60000,
+      end: false,
+      fastSkip: false,
+    });
   },
 };
 
