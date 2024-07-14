@@ -1,12 +1,13 @@
 import type {
   CommandInteraction,
   ApplicationCommandData,
-  SlashCommandBuilder
+  SlashCommandBuilder,
+  ChatInputApplicationCommandData
 } from "discord.js";
 import Pterodragon from "../Pterodragon";
 
 interface BaseCommand {
-  command: SlashCommandBuilder | ApplicationCommandData;
+  command: SlashCommandBuilder | ApplicationCommandData<ChatInputApplicationCommandData>;
   enabled: boolean;
   timeout?: number;
   usage?: string;

@@ -38,10 +38,5 @@ export default class Pterodragon extends Client {
 
   async start() {
     // Register Command
-    const cmd = new SlashCommandBuilder()
-      .setName("pings")
-      .setDescription("Replies with Pong!");
-    await this.application?.commands.create(cmd);
-      console.log(cmd.toJSON())
   }
 }
