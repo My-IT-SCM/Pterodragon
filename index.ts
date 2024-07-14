@@ -3,7 +3,7 @@ import config from "./config.json";
 
 async function main() {
   const ptero = new Pterodragon();
-  await ptero.init();
+  await ptero.init(config);
   await ptero.login(config["discord-token"]);
   await ptero.start();
 }

@@ -1,12 +1,14 @@
 import { Client, GatewayIntentBits, SlashCommandBuilder } from "discord.js";
 import EventHandler from "./handler/EventHandler";
 import CommandHandler from "./handler/CommandHandler";
+import type configs from "../config.json";
 
 export default class Pterodragon extends Client {
   commandHandler: CommandHandler;
   eventHandler: EventHandler;
+  config: typeof configs;
 
-  constructor() {
+  constructor(config: typeof configs) {
     super({
       intents: [
         GatewayIntentBits.GuildEmojisAndStickers,
@@ -30,6 +32,7 @@ export default class Pterodragon extends Client {
     this.commandHandler.loadAll();
     this.eventHandler = new EventHandler(this);
     this.eventHandler.loadAll();
+    this.config = config;
   }
 
   async init() {
