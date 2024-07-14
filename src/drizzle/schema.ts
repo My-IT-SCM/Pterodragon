@@ -1,6 +1,6 @@
 import { mysqlTable, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
 
-export const users = mysqlTable(
+export const UserTable = mysqlTable(
   "users",
   {
     id: varchar("id", { length: 256 }).primaryKey(),
