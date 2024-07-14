@@ -1,14 +1,13 @@
 import type {
   CommandInteraction,
-  ApplicationCommandData
+  ApplicationCommandData,
+  SlashCommandBuilder
 } from "discord.js";
 import Pterodragon from "../Pterodragon";
 
 interface BaseCommand {
-  name: string;
+  command: SlashCommandBuilder | ApplicationCommandData;
   enabled: boolean;
-  description: string;
-  nsfw?: boolean;
   timeout?: number;
   usage?: string;
   run(

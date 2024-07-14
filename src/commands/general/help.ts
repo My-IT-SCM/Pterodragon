@@ -2,8 +2,8 @@ import { BaseCommand } from "@/types/command";
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import InteractionButtonPages from "@utils/InteractionButtonPage";
 const command = new SlashCommandBuilder()
-.setName("help")
-.setDescription("Shows all the commands")
+  .setName("help")
+  .setDescription("Shows all the commands");
 
 const ping: BaseCommand = {
   command: command,
@@ -21,7 +21,9 @@ const ping: BaseCommand = {
         .setTitle(`Pterodragon Commands`)
         .setDescription(
           current
-            .map((cmd) => `**${cmd.name}** - ${cmd.description}`)
+            .map(
+              (cmd) => `**${cmd.command.name}** - ${cmd.command.description}`
+            )
             .join("\n")
         )
         .setTimestamp();
