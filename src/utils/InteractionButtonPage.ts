@@ -34,10 +34,10 @@ async function InteractionButtonPages({
     end: "❌",
   };
   const defaultStyles: { [key: string]: "Success" | "Primary" | "Danger" } = {
-    first: "Success",
-    previous: "Primary",
-    next: "Primary",
-    last: "Primary",
+    first: "Primary",
+    previous: "Success",
+    next: "Success",
+    last: "Success",
     end: "Danger",
   };
   let currentPage = 1;
@@ -58,6 +58,7 @@ async function InteractionButtonPages({
       accumulator.push(
         new ButtonBuilder()
           .setEmoji(defaultEmojis[name])
+          .setLabel(name.toUpperCase())
           .setCustomId(name)
           .setDisabled(state || checkState(name))
           .setStyle(ButtonStyle[`${defaultStyles[name]}`])
@@ -115,7 +116,9 @@ async function InteractionButtonPages({
   });
 
   collector.on("end", () => {
-    interaction.deleteReply();
+    interaction.editReply({
+      components: components(true),
+    });
   });
 }
 
