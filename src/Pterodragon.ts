@@ -44,5 +44,6 @@ export default class Pterodragon extends Client {
     // Register Command
     const db = new DBManager(this);
     await db.connect();
+    await db.migrate();
   }
 }

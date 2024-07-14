@@ -1,6 +1,7 @@
 import type Pterodragon from "../Pterodragon";
 import mysql from "mysql2/promise";
 import { drizzle, MySql2Database } from "drizzle-orm/mysql2";
+import { migrate } from "drizzle-orm/mysql2/migrator";
 
 export const DBManager = class {
   private client: Pterodragon;
@@ -21,7 +22,19 @@ export const DBManager = class {
       });
     if (connection) {
       console.log("Connected to database: " + config.mysql.database);
-      this.db = await drizzle(connection);
+      this.db = await drizzle(connection, { logger: true });
+    }
+  }
+
+  async migrate() {
+    if (this.db) {
+      await migrate(this.db, {
+        migrationsFolder: "./src/drizzle/migrations",
+      }).catch((err) => {
+        console.log("Error migrating database: ");
+        throw err;
+      });
+      return true;
     }
   }
 };
