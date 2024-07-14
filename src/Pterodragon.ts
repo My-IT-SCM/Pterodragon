@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, Collection } from "discord.js";
+import { Client, GatewayIntentBits, SlashCommandBuilder } from "discord.js";
 import EventHandler from "./handler/EventHandler";
 import CommandHandler from "./handler/CommandHandler";
 
@@ -23,6 +23,7 @@ export default class Pterodragon extends Client {
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildModeration,
         GatewayIntentBits.MessageContent,
+      
       ],
     });
     this.commandHandler = new CommandHandler(this);
@@ -31,7 +32,16 @@ export default class Pterodragon extends Client {
     this.eventHandler.loadAll();
   }
 
-  async init() {}
+  async init() {
+    console.log("Initializing...");
+  }
 
-  async start() {}
+  async start() {
+    // Register Command
+    const cmd = new SlashCommandBuilder()
+      .setName("pings")
+      .setDescription("Replies with Pong!");
+    await this.application?.commands.create(cmd);
+      console.log(cmd.toJSON())
+  }
 }
