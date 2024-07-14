@@ -3,7 +3,7 @@ import mysql from "mysql2/promise";
 import { drizzle, MySql2Database } from "drizzle-orm/mysql2";
 import { migrate } from "drizzle-orm/mysql2/migrator";
 
- class DBManager {
+class DBManager {
   private client: Pterodragon;
   db: MySql2Database | null = null;
 
@@ -22,8 +22,7 @@ import { migrate } from "drizzle-orm/mysql2/migrator";
       });
     if (connection) {
       console.log("Connected to database: " + config.mysql.database);
-      this.db = await drizzle(connection, { logger: true });
-    
+      this.db = await drizzle(connection);
     }
   }
 
@@ -38,6 +37,6 @@ import { migrate } from "drizzle-orm/mysql2/migrator";
       return true;
     }
   }
-};
+}
 
 export default DBManager;
