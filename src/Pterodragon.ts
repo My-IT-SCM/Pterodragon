@@ -2,13 +2,13 @@ import { Client, GatewayIntentBits, SlashCommandBuilder } from "discord.js";
 import EventHandler from "./handler/EventHandler";
 import CommandHandler from "./handler/CommandHandler";
 import type configs from "../config.json";
-import { DBManager } from "./utils/database";
+import DBManager from "./utils/database";
 
 export default class Pterodragon extends Client {
   commandHandler: CommandHandler;
   eventHandler: EventHandler;
   config: typeof configs;
-  DBManager: typeof DBManager | null = null;
+  DBM: DBManager;
 
   constructor(config: typeof configs) {
     super({
@@ -34,6 +34,7 @@ export default class Pterodragon extends Client {
     this.eventHandler = new EventHandler(this);
     this.eventHandler.loadAll();
     this.config = config;
+    this.DBM = new DBManager(this);
   }
 
   async init() {
@@ -42,8 +43,7 @@ export default class Pterodragon extends Client {
 
   async start() {
     // Register Command
-    const db = new DBManager(this);
-    await db.connect();
-    await db.migrate();
+    await this.DBM.connect();
+    await this.DBM.migrate();
   }
 }

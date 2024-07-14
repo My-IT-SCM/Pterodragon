@@ -3,7 +3,7 @@ import mysql from "mysql2/promise";
 import { drizzle, MySql2Database } from "drizzle-orm/mysql2";
 import { migrate } from "drizzle-orm/mysql2/migrator";
 
-export const DBManager = class {
+ class DBManager {
   private client: Pterodragon;
   db: MySql2Database | null = null;
 
@@ -23,6 +23,7 @@ export const DBManager = class {
     if (connection) {
       console.log("Connected to database: " + config.mysql.database);
       this.db = await drizzle(connection, { logger: true });
+    
     }
   }
 
@@ -38,3 +39,5 @@ export const DBManager = class {
     }
   }
 };
+
+export default DBManager;
