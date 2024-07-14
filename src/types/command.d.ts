@@ -11,6 +11,7 @@ interface BaseCommand {
   enabled: boolean;
   timeout?: number;
   usage?: string;
+  category?: string;
   run(
     interaction: CommandInteraction,
     client: Pterodragon

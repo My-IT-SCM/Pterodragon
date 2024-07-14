@@ -19,10 +19,10 @@ class CommandHandler {
       const files = fs.readdirSync(`./src/commands/${category}`);
       if (!files || files.length === 0) continue;
       for (const file of files) {
-        const cmd = (await import(`@commands/${category}/${file}`)).default;
+        const cmd = (await import(`@commands/${category}/${file}`)).default as BaseCommand;
         if(!cmd.enabled) continue;
 
-        this.commands.set(cmd.name, {
+        this.commands.set(cmd.command.name, {
           ...cmd,
           category: category,
         });
