@@ -1,8 +1,13 @@
 import { BaseCommand } from "@/types/command";
+import { SlashCommandBuilder } from "discord.js";
+
+const command = new SlashCommandBuilder()
+  .setName("ping")
+  .setDescription("Ping!");
+
 
 const ping: BaseCommand = {
-  name: "ping",
-  description: "Ping!",
+  command: command,
   enabled: true,
   async run(interaction) {
     interaction.reply("Pong!");
