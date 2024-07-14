@@ -6,7 +6,7 @@ import { BaseCommand } from "@/types/command";
 class CommandHandler {
   private client: Pterodragon;
   private commands: Collection<string, BaseCommand>;
-  private categories: string[];
+  categories: string[];
 
   constructor(client: Pterodragon) {
     this.client = client;
