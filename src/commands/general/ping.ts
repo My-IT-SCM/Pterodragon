@@ -1,16 +1,27 @@
 import { BaseCommand } from "@/types/command";
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
 
 const command = new SlashCommandBuilder()
   .setName("ping")
-  .setDescription("Ping!");
-
+  .setDescription("Shows latency of the bot");
 
 const ping: BaseCommand = {
   command: command,
   enabled: true,
-  async run(interaction) {
-    interaction.reply("Pong!");
+  async run(interaction, client) {
+    await interaction
+      .reply({ content: "Pinging...", fetchReply: true })
+      .then(async (sent) => {
+        const emebed = new EmbedBuilder()
+          .setTitle("Pong!")
+          .setDescription(
+            `Bot Latency: ${Math.round(client.ws.ping)}ms \nAPI Latency: ${
+              sent.createdTimestamp - interaction.createdTimestamp
+            }ms`
+          );
+
+        await interaction.editReply({ content: "", embeds: [emebed] });
+      });
   },
 };
 
