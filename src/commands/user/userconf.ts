@@ -4,7 +4,7 @@ import { UserTable } from "@drizzle/schema";
 
 const command = new SlashCommandBuilder()
   .setName("userconf")
-  .setDescription("Set user configurations")
+  .setDescription("User Settings")
   .addStringOption((opt) =>
     opt.setName("token").setDescription("Pterodactyl Client API Token")
   );
