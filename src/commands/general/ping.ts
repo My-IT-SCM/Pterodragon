@@ -10,15 +10,20 @@ const ping: BaseCommand = {
   enabled: true,
   async run(interaction, client) {
     await interaction
-      .reply({ content: "Pinging...", fetchReply: true })
+      .reply({ content: "🏓 Pinging...", fetchReply: true })
       .then(async (sent) => {
-        const emebed = new EmbedBuilder()
-          .setTitle("Pong!")
-          .setDescription(
-            `Bot Latency: ${Math.round(client.ws.ping)}ms \nAPI Latency: ${
-              sent.createdTimestamp - interaction.createdTimestamp
-            }ms`
-          );
+        const emebed = new EmbedBuilder().setTitle("🏓 Pong!").addFields(
+          {
+            name: "Bot Latency",
+            value: `${Math.round(client.ws.ping)}ms`,
+            inline: true,
+          },
+          {
+            name: "API Latency",
+            value: `${sent.createdTimestamp - interaction.createdTimestamp}ms`,
+            inline: true,
+          }
+        );
 
         await interaction.editReply({ content: "", embeds: [emebed] });
       });
