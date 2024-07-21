@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 import config from "@/config.json";
 
 function getPanelURL() {
-  let panelURL = config["panel-URL"];
+  let panelURL = config["panel_URL"];
   if (!panelURL) throw new Error("Panel URL not provided in config.json");
   panelURL =
     panelURL.startsWith("http://") || panelURL.startsWith("https://")
@@ -26,7 +26,7 @@ function getHeaders() {
   return headers;
 }
 
-async function sendRequest({
+async function adminRequest({
   method,
   endpoint,
   data,
@@ -40,6 +40,7 @@ async function sendRequest({
 
   const res = await fetch(`${panelURL}${endpoint}`, {
     headers: headers,
+    method: method,
     body: data,
   });
   return await res.json().catch((err) => {
@@ -47,4 +48,32 @@ async function sendRequest({
   });
 }
 
-export default sendRequest;
+async function userRequest({
+  method,
+  endpoint,
+  data,
+  key,
+}: {
+  method?: string;
+  endpoint: string;
+  data?: any;
+  key: string;
+}) {
+  const headers: requestHeader = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${key}`,
+  };
+  const panelURL = getPanelURL();
+
+  const res = await fetch(`${panelURL}${endpoint}`, {
+    headers: headers,
+    method: method,
+    body: data,
+  });
+  return await res.json().catch((err) => {
+    console.log(err.message);
+  });
+}
+
+export { userRequest, adminRequest };

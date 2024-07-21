@@ -33,10 +33,10 @@ class CommandHandler {
 
   async loadSlashCommands(): Promise<void> {
     const client = this.client;
-    for (const command of this.commands.values()) {
-      if (!client.application?.commands.cache.get(command.command.name))
-        await client.application?.commands.create(command.command);
-    }
+    // for (const command of this.commands.values()) {
+    //   if (!client.application?.commands.cache.get(command.command.name))
+    //     await client.application?.commands.create(command.command);
+    // }
   }
 
   get(commandName: string): BaseCommand | undefined {
