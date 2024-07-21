@@ -58,7 +58,7 @@ async function userRequest({
   endpoint: string;
   data?: any;
   key: string;
-}) {
+}): Promise<any>{
   const headers: requestHeader = {
     Accept: "application/json",
     "Content-Type": "application/json",

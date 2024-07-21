@@ -47,26 +47,25 @@ const rename: BaseCommand = {
     const search = interaction.options.get("search")?.value as string;
     const name = interaction.options.get("name")?.value as string;
     const searchBy = interaction.options.get("search_by")?.value;
-    const res = await userRequest({
+    const res: { data: ServerDetails[] } = await userRequest({
       endpoint: "/api/client",
       key: credentails[0].token as string,
     });
+
+    if (!res.data.length) return await interaction.reply("No servers found");
 
     const server = res.data.filter((server) => {
       if (searchBy === "search_by_name") {
         return server.attributes.name === search;
       } else if (searchBy === "search_by_id") {
-        return server.attributes.id === search;
+        return server.attributes.identifier === search;
       } else if (searchBy === "search_by_uuid") {
         return server.attributes.uuid === search;
-      } else if (searchBy === "search_by_eid") {
-        return server.attributes.external_id === search;
-      } else {
+      }  else {
         return (
           server.attributes.name === search ||
-          server.attributes.id === search ||
-          server.attributes.uuid === search ||
-          server.attributes.external_id === search
+          server.attributes.identifier === search ||
+          server.attributes.uuid === search 
         );
       }
     });

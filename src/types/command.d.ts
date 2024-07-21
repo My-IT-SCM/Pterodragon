@@ -15,7 +15,7 @@ interface BaseCommand {
   run(
     interaction: CommandInteraction,
     client: Pterodragon
-  ): Promise<void>;
+  ): Promise<any>;
 };
 
 type BaseCommand = BaseCommand;
