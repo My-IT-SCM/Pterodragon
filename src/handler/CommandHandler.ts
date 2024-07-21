@@ -33,6 +33,8 @@ class CommandHandler {
 
   async loadSlashCommands(): Promise<void> {
     const client = this.client;
+    const cmd = client.application?.commands.cache.get("rename");
+    if(cmd) await client.application?.commands.delete(cmd.id);
     for (const command of this.commands.values()) {
       if (!client.application?.commands.cache.get(command.command.name))
         await client.application?.commands.create(command.command);
@@ -48,6 +50,7 @@ class CommandHandler {
   }
 
   async registerCommand(command: SlashCommandBuilder) {
+    1;
     await this.client.application?.commands.create(command);
   }
 }

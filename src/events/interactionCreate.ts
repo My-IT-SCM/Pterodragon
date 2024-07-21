@@ -10,6 +10,6 @@ export default async function onInteractionCreate(interaction: Interaction, clie
             interaction.reply("There was an error while executing this command!").catch(() => {});
             console.log(`An error occured while executing command ${commandName}`);
             console.log(err);
-        }).then(() => console.log(`Command ${commandName} executed by ${interaction.user.tag}`));
+        }).then(() => console.log(`${interaction.user.username} executed /${commandName}`));
     }
 }
