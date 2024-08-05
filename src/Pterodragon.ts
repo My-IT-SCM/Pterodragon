@@ -44,7 +44,7 @@ export default class Pterodragon extends Client {
   async start() {
     // Register Command
     await this.DBM.connect();
-    await this.DBM.migrate();
+    // await this.DBM.migrate();
     await this.commandHandler.loadSlashCommands();
   }
 }
