@@ -15,7 +15,7 @@ const showServerInfo = async function ({ apiKey, serverId }: Props) {
   });
   await fs.writeFileSync(
     "./cache.json",
-    JSON.stringify(2, null, server),
+    JSON.stringify(server, null, 4),
     "utf-8"
   );
   return console.log(server);

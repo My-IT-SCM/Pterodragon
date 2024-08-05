@@ -65,6 +65,7 @@ const servers: BaseCommand = {
     });
 
     if (!server[0]) return await interaction.reply("Server not found");
+    await interaction.reply("Developing....")
     return showServerInfo({
       serverId: search,
       apiKey: credentails[0].token as string,
